@@ -1,1 +1,1 @@
-web: gunicorn arglyph.wsgi
+web: gunicorn config.wsgi
