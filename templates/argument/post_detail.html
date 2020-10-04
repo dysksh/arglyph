@@ -1,0 +1,52 @@
+{% extends 'account/base.html'%}
+
+{% block body %}
+
+    <div class="item">
+        <h1>{{ object.title}}</h1>
+        <p>argued by: <span>{{ object.advocate }}</span> {{ object.date_posted|date:'Y-m-d P' }}</p>
+
+        <ul>
+            <li>{{ object.content }}</li>
+        </ul>
+        {% if request.user == post.advocate %}
+            <div class="form-btn">
+                <form action="{% url 'post-update' post.id %}">
+                    <button type="submit">Update</button>
+                </form>
+                <form action="{% url 'post-delete' post.id %}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% endif %}
+        
+        <div>
+            <h2 class="comment-list">Comment List</h2>
+            {% for comment in comment_list %}
+                <div class="box">
+                    <div class="comment-content">{{ comment.content }}</div>
+                    <p>{{ comment.author }}</p>
+                    <div class="form-btn">
+                        <form action="{% url 'reply-create' comment.pk %}">
+                            <button type="submit">Reply</button>
+                        </form>
+                    </div>
+                    {% with reply_list=comment.comment_set.all %}
+                        {% include 'argument/includes/reply.html' %}
+                    {% endwith %}
+                </div>
+            {% endfor %}
+
+            <div class="form-btn">
+                <form action="{% url 'comment-create' post.pk %}">
+                    <button type="submit">Comment</button>
+                </form>
+            </div>
+        </div>
+        
+
+
+
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,14 @@
+{% for reply in reply_list %}
+    <div class="box">
+        <div class="comment-content">{{ comment.content }}</div>
+        <p>{{ reply.author }}</p>
+        <div class="form-btn">
+            <form action="{% url 'reply-create' reply.pk %}">
+                <button type="submit">Reply</button>
+            </form>
+        </div>
+        {% with reply_list=reply.comment_set.all %}
+            {% include 'argument/includes/reply.html' %}
+        {% endwith %}
+    </div>
+{% endfor %}
