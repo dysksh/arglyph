@@ -134,7 +134,7 @@ AUTH_USER_MODEL = 'account.User'
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['OPTIONS'] = 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
