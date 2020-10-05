@@ -145,7 +145,7 @@ ALLOWED_HOSTS = ['*']
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'arglyph/static/'),
+    os.path.join(BASE_DIR, '/static/'),
 )
 
 DEBUG = False
