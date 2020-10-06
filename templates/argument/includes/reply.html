@@ -1,6 +1,6 @@
 {% for reply in reply_list %}
     <div class="box">
-        <div class="comment-content">{{ comment.content }}</div>
+        <div class="comment-content">{{ reply.content }}</div>
         <p>{{ reply.author }}</p>
         <div class="form-btn">
             <form action="{% url 'reply-create' reply.pk %}">
