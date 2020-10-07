@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'fozgi8+)y__5x@p%3)xsoxc8yi5-x$vjj7a5k&(n#-j-n2jo2^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,14 +78,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+import dj_database_url
+from django.db.backends.mysql.base import DatabaseWrapper
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'arglyph',
-        'USER': 'root',
-        'PASSWORD': '',
-    }
+    'default': {} 
 }
+DATABASES['default'] = dj_database_url.config()
+DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
+DatabaseWrapper.data_types['DateTimeField'] = 'datetime'
 
 
 # Password validation
@@ -129,20 +129,7 @@ LOGIN_REDIRECT_URL = 'argument-home'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'account.User'
-
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['OPTIONS'] = {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
-from django.db.backends.mysql.base import DatabaseWrapper
-DatabaseWrapper.data_types['DateTimeField'] = 'datetime'
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-ALLOWED_HOSTS = ['*']
-
-
-
-DEBUG = False
 
 try:
     from .local_settings import *
@@ -150,6 +137,6 @@ except ImportError:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, '/static/'),
+        os.path.join(BASE_DIR, 'static'),
     )
     pass
