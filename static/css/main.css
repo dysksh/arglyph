@@ -345,7 +345,7 @@ input:-webkit-autofill {
 .comment-content {
   font-size: 18px;
 }
-.box {
+.comment-box {
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
@@ -353,7 +353,7 @@ input:-webkit-autofill {
   display: block;
   padding: 1.25rem;
 }
-.box:not(:last-child), .comment-list:not(:last-child){
+.comment-box:not(:last-child), .comment-list:not(:last-child){
   margin-bottom: 1.5rem;
 }
 .post-new {

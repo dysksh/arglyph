@@ -1,5 +1,12 @@
 {% for reply in reply_list %}
-    <div class="box">
+    {% for comment in comment_list %}
+        {% if comment.id == reply.parent_id %}
+            {% if comment.parent_id == NULL %}
+                <hr>
+            {% endif %}
+        {% endif %}
+    {% endfor%}
+    <div class="reply-box">
         <div class="comment-content">{{ reply.content }}</div>
         <p>{{ reply.author }}</p>
         <div class="form-btn">
