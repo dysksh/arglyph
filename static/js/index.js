@@ -20,7 +20,11 @@ $(function(){
 
     // var id = document.getElementById(href);
     // var urlHash = location.hash;
-    $(`${href} .content`).eq(0).css( { 'background-color' : '#bbbbbb' });
+    $(`${href} .content`).eq(0).css( { 'background-color' : '#f4f5f7' });
+    var alertmsg = function(){
+      $(`${href} .content`).eq(0).css( { 'background-color' : '#fff' });
+    }
+    setTimeout(alertmsg, 1500);
 
     return false;
   });

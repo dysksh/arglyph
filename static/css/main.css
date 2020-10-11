@@ -345,6 +345,7 @@ input:-webkit-autofill {
 }
 .content {
   font-size: 18px;
+  border-radius: 5px;
 }
 .comment-box-outer {
   padding-top: 60px;
