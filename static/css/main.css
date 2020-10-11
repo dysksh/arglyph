@@ -8,6 +8,7 @@ header {
   padding: 0 10%;
   background: #fefefe;
   /* height: 70px; */
+  z-index: 3;
 }
 footer {
   display: none;
@@ -342,8 +343,12 @@ input:-webkit-autofill {
 .item button:hover {
   background-color: #999;
 }
-.comment-content {
+.content {
   font-size: 18px;
+}
+.comment-box-outer {
+  padding-top: 60px;
+  margin-top:-60px;
 }
 .comment-box {
   background-color: #fff;
@@ -353,8 +358,26 @@ input:-webkit-autofill {
   display: block;
   padding: 1.25rem;
 }
-.comment-box:not(:last-child), .comment-list:not(:last-child){
+.reply-box {
+  padding-top: 60px;
+  margin-top:-60px;
+}
+.comment-box-outer:not(:last-child), .comment-list:not(:last-child){
   margin-bottom: 1.5rem;
+}
+.reply-to-comment {
+  display: flex;
+}
+.reply-to {
+  font-size: 12px;
+  white-space: nowrap
+}
+.comment {
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 .post-new {
   width: 60px;
@@ -429,6 +452,13 @@ input:-webkit-autofill {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+  }
+  .reply-to {
+    width: 15%;
+  }
+  .comment {
+    width: 85%;
+    margin-left: 15%;
   }
   /* フッターはスマホサイズでしか使用しないためここに記述 */
   footer {

@@ -6,16 +6,20 @@
             {% endif %}
         {% endif %}
     {% endfor%}
-    <div class="reply-box">
-        <div class="comment-content">{{ reply.content }}</div>
+    <div class="reply-box" id="{{ reply.id }}">
+        <div class="reply-to-comment">
+            <div class="reply-to">返信先:</div>
+            <a href="#{{ reply.parent.id }}"><div class="comment">{{ reply.parent.content }}</div></a>
+        </div>
+        <div class="content">{{ reply.content }}</div>
         <p>{{ reply.author }}</p>
         <div class="form-btn">
             <form action="{% url 'reply-create' reply.pk %}">
                 <button type="submit">Reply</button>
             </form>
         </div>
-        {% with reply_list=reply.comment_set.all %}
-            {% include 'argument/includes/reply.html' %}
-        {% endwith %}
     </div>
+    {% with reply_list=reply.comment_set.all %}
+        {% include 'argument/includes/reply.html' %}
+    {% endwith %}
 {% endfor %}

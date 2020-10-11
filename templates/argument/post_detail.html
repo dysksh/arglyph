@@ -23,17 +23,19 @@
         <div>
             <h2 class="comment-list">Comment List</h2>
             {% for comment in comment_list %}
-                <div class="comment-box">
-                    <div class="comment-content">{{ comment.content }}</div>
-                    <p>{{ comment.author }}</p>
-                    <div class="form-btn">
-                        <form action="{% url 'reply-create' comment.pk %}">
-                            <button type="submit">Reply</button>
-                        </form>
+                <div class="comment-box-outer" id="{{ comment.id }}">
+                    <div class="comment-box">
+                        <div class="content">{{ comment.content }}</div>
+                        <p>{{ comment.author }}</p>
+                        <div class="form-btn">
+                            <form action="{% url 'reply-create' comment.pk %}">
+                                <button type="submit">Reply</button>
+                            </form>
+                        </div>
+                        {% with reply_list=comment.comment_set.all %}
+                            {% include 'argument/includes/reply.html' %}
+                        {% endwith %}
                     </div>
-                    {% with reply_list=comment.comment_set.all %}
-                        {% include 'argument/includes/reply.html' %}
-                    {% endwith %}
                 </div>
             {% endfor %}
 
