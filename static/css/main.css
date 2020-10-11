@@ -453,13 +453,6 @@ input:-webkit-autofill {
     -webkit-line-clamp: 3;
     overflow: hidden;
   }
-  .reply-to {
-    width: 15%;
-  }
-  .comment {
-    width: 85%;
-    margin-left: 15%;
-  }
   /* フッターはスマホサイズでしか使用しないためここに記述 */
   footer {
     width: 100%;
