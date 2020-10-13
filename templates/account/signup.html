@@ -9,13 +9,12 @@
 
     <section id="login-reg">
         <div class="signup-form">
-            <h3>Sign up now</h3>
-            <p>Fill in the form below to get instant access</p>
+            <h3>アカウントを作成</h3>
             <div>
                 <form method='POST' role="form" action="">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit">Sign me up!</button>
+                    <button type="submit">登録する</button>
                 </form>
                 <style>
                     #hint_id_username,

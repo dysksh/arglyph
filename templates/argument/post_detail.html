@@ -4,7 +4,7 @@
 
     <div class="item">
         <h1>{{ object.title}}</h1>
-        <p>argued by: <span>{{ object.advocate }}</span> {{ object.date_posted|date:'Y-m-d P' }}</p>
+        <p>投稿者: <span>{{ object.advocate }}</span> {{ object.date_posted|date:'Y-m-d P' }}</p>
 
         <ul>
             <li>{{ object.content }}</li>
@@ -12,16 +12,16 @@
         {% if request.user == post.advocate %}
             <div class="form-btn">
                 <form action="{% url 'post-update' post.id %}">
-                    <button type="submit">Update</button>
+                    <button type="submit">更新</button>
                 </form>
                 <form action="{% url 'post-delete' post.id %}">
-                    <button type="submit">Delete</button>
+                    <button type="submit">削除</button>
                 </form>
             </div>
         {% endif %}
         
         <div>
-            <h2 class="comment-list">Comment List</h2>
+            <h2 class="comment-list">コメントリスト</h2>
             {% for comment in comment_list %}
                 <div class="comment-box-outer" id="{{ comment.id }}">
                     <div class="comment-box">
@@ -29,7 +29,7 @@
                         <p>{{ comment.author }}</p>
                         <div class="form-btn">
                             <form action="{% url 'reply-create' comment.pk %}">
-                                <button type="submit">Reply</button>
+                                <button type="submit">返信</button>
                             </form>
                         </div>
                         {% with reply_list=comment.comment_set.all %}
@@ -41,7 +41,7 @@
 
             <div class="form-btn">
                 <form action="{% url 'comment-create' post.pk %}">
-                    <button type="submit">Comment</button>
+                    <button type="submit">コメント</button>
                 </form>
             </div>
         </div>
