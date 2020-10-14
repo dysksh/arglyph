@@ -39,10 +39,10 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
-    username = models.CharField(_('user name'), unique=True, max_length=30)
-    email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True)
+    username = models.CharField(unique=True, max_length=30, verbose_name="ユーザー名")
+    email = models.EmailField(unique=True, verbose_name="メールアドレス")
+    first_name = models.CharField(max_length=30, blank=True, verbose_name="姓")
+    last_name = models.CharField(max_length=150, blank=True, verbose_name="名")
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -64,7 +64,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
-    # USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['email',]
 
     class Meta:
