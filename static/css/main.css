@@ -320,6 +320,9 @@ input:-webkit-autofill {
   text-align: right;
   font-size: 12px;
 }
+.item ul li {
+  margin-bottom: 1rem;
+}
 .form-btn {
   text-align: right;
 }
