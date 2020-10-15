@@ -3,6 +3,23 @@
 
 
 {% block body %}
+    <div class="item">
+        <h1>{{ post.title}}</h1>
+        <p>投稿者: <span>{{ post.advocate }}</span> {{ post.date_posted|date:'Y-m-d P' }}</p>
+
+        <ul>
+            <li>{{ post.content }}</li>
+        </ul>
+        
+        {% if comment %}
+            <div class="comment-box-outer" id="{{ comment.parent.id }}">
+                <div class="comment-box">
+                    <div class="content">{{ comment.content }}</div>
+                    <p>{{ comment.author }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
     <section class="section">
         <div class="form">
             <form action="" method="POST">
