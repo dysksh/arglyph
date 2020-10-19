@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+# app_name = 'argument'
+
 urlpatterns = [
     path('', views.PostListView.as_view(), name='argument-home'),
     path('post/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),

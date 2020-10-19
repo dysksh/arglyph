@@ -106,6 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -127,7 +128,7 @@ USE_TZ = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'argument-home'
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'account:login'
 AUTH_USER_MODEL = 'account.User'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 STATIC_URL = '/static/'
