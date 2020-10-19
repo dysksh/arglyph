@@ -41,11 +41,11 @@
             <div class="menu">
                 <ul>
                     {% if user.is_authenticated %}
-                        <li class="menu-item"><a href="{% url 'logout' %}">ログアウト</a></li>
+                        <li class="menu-item"><a href="{% url 'account:logout' %}">ログアウト</a></li>
                         <li class="menu-item"><a href="#">プロフィール</a></li>
                     {% else %}
-                        <li class="menu-item"><a href="{% url 'login' %}">ログイン</a></li>
-                        <li class="menu-item"><a href="{% url 'signup' %}">登録する</a></li>
+                        <li class="menu-item"><a href="{% url 'account:login' %}">ログイン</a></li>
+                        <li class="menu-item"><a href="{% url 'account:signup' %}">登録する</a></li>
                     {% endif %}
                 </ul>
             </div>
