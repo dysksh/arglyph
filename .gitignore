@@ -1,5 +1,6 @@
 __pycache__
 arglyph/static/
 local_settings.py
+.env
 db.sqlite3
 *.py[co]
