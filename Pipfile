@@ -15,7 +15,8 @@ pytz = "==2020.1"
 sqlparse = "==0.3.1"
 whitenoise = "==5.2.0"
 Django = "==3.1"
-environ = "*"
+django-environ = "==0.4.5"
+environ = "==1.0"
 
 [requires]
 python_version = "3.8"
