@@ -66,8 +66,9 @@ class Signup(generic.CreateView):
 
             subject = render_to_string('mail_templates/signup/subject.txt', context)
             message = render_to_string('mail_templates/signup/message.txt', context)
+            from_email = settings.DEFAULT_FROM_EMAIL
 
-            user.email_user(subject, message)
+            user.email_user(subject, message, from_email)
             return redirect('account:signup-done')
 
 
