@@ -144,7 +144,7 @@ USE_TZ = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'argument-home'
-LOGIN_URL = 'login'
+LOGIN_URL = 'account:login'
 LOGOUT_REDIRECT_URL = 'account:login'
 AUTH_USER_MODEL = 'account.User'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
