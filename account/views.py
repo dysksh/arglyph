@@ -1,5 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,23 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
         email = self.cleaned_data['email']
         User.objects.filter(email=email, is_active=False).delete()
         return email
-
-
-# def signup(request):
-#     if request.user.is_authenticated:
-#         return redirect('argument-home')
-#     else:
-#         if request.method == 'POST':
-#             form = CustomUserCreationForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('login')
-#         else:
-#             form = CustomUserCreationForm()
-#         return render(request, 'account/signup.html', {'form': form})
-
-
-
 
 class Signup(generic.CreateView):
     """ユーザー仮登録"""
@@ -111,3 +96,22 @@ class SignupComplete(generic.TemplateView):
                     return super().get(request, **kwargs)
 
         return HttpResponseBadRequest()
+
+class PasswordReset(PasswordResetView):
+    subject_template_name = 'mail_templates/password_reset/subject.txt'
+    email_template_name = 'mail_templates/password_reset/message.txt'
+    template_name = 'account/password_reset_form.html'
+    success_url = reverse_lazy('account:password-reset-done')
+
+
+class PasswordResetDone(PasswordResetDoneView):
+    template_name = 'account/password_reset_done.html'
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    success_url = reverse_lazy('account:password-reset-complete')
+    template_name = 'account/password_reset_confirm.html'
+
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    template_name = 'account/password_reset_complete.html'
