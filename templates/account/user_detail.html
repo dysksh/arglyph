@@ -1,0 +1,9 @@
+{% extends 'account/base.html' %}
+{% block body %}
+    <div class="user-detail">
+        <div class="user-name">{{ user.username }}</div>
+        {% if user.pk == request.user.pk %}
+            <a href="{% url 'account:user-update' user.pk %}">変更</a>
+        {% endif %}
+    </div>
+{% endblock %}
