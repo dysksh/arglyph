@@ -3,30 +3,18 @@
 {% load static %}
 
 
-
-<body id="wrapper">
-
-    {% block body %}
-
-    <section id="login-reg">
-        <div class="login-form">
+{% block body %}
+    <section>
+        <div class="account-form">
             <h3>Arglyphにログイン</h3>
-            <div>
-                <form method='POST' role="form" action="">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit">ログイン</button>
-                </form>
-            </div>
+            <form method='POST' role="form" action="">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit">ログイン</button>
+            </form>
             <div class="login-link">
                 <a href="{% url 'account:password-reset' %}">パスワードを忘れた方</a>・<a href="{% url 'account:signup' %}">アカウント作成</a>
             </div>
         </div>
     </section>
-
-   
-   
-
-    {% endblock body %}
-
-</body>
+{% endblock body %}

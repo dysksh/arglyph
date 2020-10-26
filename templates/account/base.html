@@ -10,7 +10,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/skin.css' %}">
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -20,7 +19,7 @@
     <script type="text/javascript" src="{% static "js/index.js" %}"></script>
 </head>
 
-<body id="wrapper">
+<body>
 
     <header>
         <div class="header-wrapper">
@@ -57,16 +56,50 @@
         <div class="inner">
             {% if user.is_authenticated %}
                 <div class="side">
-                    <ul>
-                        <li class="side-item"><a href="/"><div class="side-item-content">ホーム</div></a></li>
-                        <li class="side-item"><a href="#"><div class="side-item-content">急上昇中</div></a></li>
-                        <li class="side-item"><a href="{% url 'account:user-detail' user.pk %}"><div class="side-item-content">プロフィール</div></a></li>
-                        <li class="side-item"><a href="#"><div class="side-item-content">通知</div></a></li>
-                        <li class="side-item"><a href="#"><div class="side-item-content">設定</div></a></li>
-                        <form action="{% url 'post-create' %}">
+                    <nav>
+                        <div class="side-item">
+                            <a href="/">
+                                <div class="side-item-content pc-only">ホーム</div>
+                                <svg viewBox="0 0 16 16" class="bi bi-house sp-only" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="side-item">
+                            <a href="#">
+                                <div class="side-item-content pc-only">急上昇中</div>
+                                <svg viewBox="0 0 16 16" class="bi bi-graph-up sp-only" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="side-item">
+                            <a href="#">
+                                <div class="side-item-content pc-only">通知</div>
+                                <svg viewBox="0 0 16 16" class="bi bi-bell sp-only" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
+                                  <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="side-item">
+                            <a href="{% url 'account:user-detail' user.pk %}">
+                                <div class="side-item-content pc-only">プロフィール</div>
+                                <svg viewBox="0 0 16 16" class="bi bi-person sp-only" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="side-item pc-only">
+                            <a href="#">
+                                <div class="side-item-content">設定</div>    
+                            </a>
+                        </div>
+                        <form action="{% url 'post-create' %}" class="pc-only">
                             <button type="submit">投稿する</button>
                         </form>
-                    </ul>
+                    </nav>
                 </div>
             {% endif %}
             <div class="main">
@@ -75,46 +108,8 @@
             </div>
         </div>
     </div>
-    {% if user.is_authenticated %}
-        {% comment %} フッターの高さ {% endcomment %}
-        <div class="sp-only" style="height: 60px;"></div>
-        <footer>
-            <div class="footer-wrapper">
-                <ul>
-                    <li>
-                        <a href="/">
-                            <svg viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                              <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <svg viewBox="0 0 16 16" class="bi bi-graph-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <svg viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
-                              <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account:user-detail' user.pk %}">
-                            <svg viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-    {% endif %}
+    {% comment %} スマホ版のメニューバーの高さ {% endcomment %}
+    <div class="sp-only" style="height: 60px;"></div>
 </body>
 
 </html>

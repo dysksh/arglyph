@@ -211,11 +211,10 @@ input:-webkit-autofill {
   overflow-y: scroll;
   position: -webkit-sticky;
   position: sticky;
-  /* background-color: aquamarine; */
   display: flex;
   border-right: 2px solid rgba(0,0,0,.1);
 }
-.side ul {
+.side nav {
   width: 100%;
   padding-top: 20px;
 }
@@ -231,7 +230,6 @@ input:-webkit-autofill {
 .side-item a {
   width: 100%;
   height: 100%;
-  /* padding: 9px; */
   font-size: 19px;
   font-weight: bold;
 }
@@ -241,10 +239,6 @@ input:-webkit-autofill {
   align-items: center;
   padding: 0 14px;
 }
-/* .side-item a div:hover {
-  border-radius: 100px;
-  background-color: #bbb;
-} */
 .side form {
   bottom: 10%;
   position: absolute;
@@ -269,13 +263,13 @@ input:-webkit-autofill {
   width: 80%;
   max-width: 1024px;
 }
-/* login */
-.login-form {
+/* account周り */
+.account-form {
   max-width: 540px;
   padding: 15px 0;
   margin: 0 auto;
 }
-.login-form button {
+.account-form button {
   width: 100%;
   height: 40px;
   font-size: 19px;
@@ -284,80 +278,18 @@ input:-webkit-autofill {
   border-radius: 100px;
   margin-top: 5px;
 }
-.login-form button:hover {
+.account-form button:hover {
   background-color: #999;
 }
-.login-link {
-  text-align: center;
-  margin: 14px auto;
+.account-form #hint_id_username,#hint_id_password1,#hint_id_new_password1 {
+    display: none;
 }
-/* signup */
-.signup-form {
-  max-width: 540px;
-  padding: 15px 0;
-  margin: 0 auto;
-}
-.signup-form button {
-  width: 100%;
-  height: 40px;
-  font-size: 19px;
-  color: #f4f5f7;
-  background-color: #666;
-  border-radius: 100px;
-  margin-top: 5px;
-}
-.signup-form button:hover {
-  background-color: #999;
-}
-.signup-done {
+.account-done {
   margin: 60px auto;
   display: flex;
   justify-content: center;
 }
-.signup-complete {
-  margin: 60px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  flex-wrap: wrap;
-}
-.signup-complete h2 {
-  margin: 40px auto;
-}
-.signup-complete .btn {
-  width: 300px;
-  height: 50px;
-  margin: 0 auto;
-  font-size: 19px;
-  color: #f4f5f7;
-  background-color: #666;
-  border-radius: 100px;
-}
-/* password-reset */
-.password-reset-form {
-  max-width: 540px;
-  padding: 15px 0;
-  margin: 0 auto;
-}
-.password-reset-form button {
-  width: 100%;
-  height: 40px;
-  font-size: 19px;
-  color: #f4f5f7;
-  background-color: #666;
-  border-radius: 100px;
-  margin-top: 5px;
-}
-.password-reset-form button:hover {
-  background-color: #999;
-}
-.password-reset-done {
-  margin: 60px auto;
-  display: flex;
-  justify-content: center;
-}
-.password-reset-complete {
+.account-complete {
   margin: 60px auto;
   display: flex;
   justify-content: center;
@@ -365,10 +297,10 @@ input:-webkit-autofill {
   width: 320px;
   flex-wrap: wrap;
 }
-.password-reset-complete h2 {
+.account-complete h2 {
   margin: 40px auto;
 }
-.password-reset-complete .btn {
+.account-complete .btn {
   width: 300px;
   height: 50px;
   margin: 0 auto;
@@ -377,23 +309,10 @@ input:-webkit-autofill {
   background-color: #666;
   border-radius: 100px;
 }
-/* user-update */
-.user-update-form {
-  max-width: 540px;
-  padding: 15px 0;
-  margin: 0 auto;
-}
-.user-update-form button {
-  width: 100%;
-  height: 40px;
-  font-size: 19px;
-  color: #f4f5f7;
-  background-color: #666;
-  border-radius: 100px;
-  margin-top: 5px;
-}
-.user-update-form button:hover {
-  background-color: #999;
+/* login */
+.login-link {
+  text-align: center;
+  margin: 14px auto;
 }
 /* user-detail */
 .user-detail {
@@ -429,29 +348,29 @@ input:-webkit-autofill {
 /* detail */
 /* delete */
 /* reply */
-.item {
+.post-item {
   font-size: 15px;
   margin: 15px;
 }
-.item h1 {
+.post-item h1 {
   font-size: 22px;
 }
-.item p {
+.post-item p {
   text-align: right;
   font-size: 12px;
 }
-.item ul li {
+.post-item .post-content {
   margin-bottom: 1rem;
 }
 .form-btn {
   text-align: right;
 }
-.item form {
+.post-item form {
   text-align: right;
   display: inline-block;
   margin: 8px 0 8px 8px;
 }
-.item button {
+.post-item button {
   width: 100%;
   height: 26px;
   padding: 5.5px 9px;
@@ -463,7 +382,7 @@ input:-webkit-autofill {
   align-items: center;
   justify-content: center;
 }
-.item button:hover {
+.post-item button:hover {
   background-color: #999;
 }
 .content {
@@ -521,11 +440,11 @@ input:-webkit-autofill {
   color: #f4f5f7;
 }
 /* form */
-.form {
+.post-form {
   font-size: 15px;
   margin: 15px;
 }
-.form button {
+.post-form button {
   height: 26px;
   padding: 5.5px 9px;
   font-size: 15px;
@@ -537,7 +456,7 @@ input:-webkit-autofill {
   align-items: center;
   justify-content: center;
 }
-.form button:hover {
+.post-form button:hover {
   background-color: #999;
 }
 
@@ -555,9 +474,6 @@ input:-webkit-autofill {
   .logo-icon {
     font-size: 30px;
   }
-  .side {
-    display: none;
-  }
   .main {
     width: 100%;
   }
@@ -565,50 +481,51 @@ input:-webkit-autofill {
     width: 90%;
     margin: 0 5%;
   }
-  .item {
+  .post-item {
     margin: 15px 0;
   }
-  .item h1 {
+  .post-item h1 {
     font-size: 18px;
   }
-  .item a ul li {
+  .post-item .post-content {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
   }
-  /* フッターはスマホサイズでしか使用しないためここに記述 */
-  footer {
+  .side {
     width: 100%;
     height: 60px;
+    max-width: unset;
     position: fixed;
     display: block;
     background: #fefefe;
+    top: unset;
     bottom: 0;
-  }
-  .footer-wrapper {
+    border-right: 0;
     margin: 0 auto;
+    overflow-y: unset;
     z-index: 3;
-    /* justify-content: space-around; */
   }
-  .footer-wrapper ul {
+  .side nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-top: 0px;
   }
-  .footer-wrapper ul li {
+  nav .side-item {
     width: 25%;
     height: 60px;
     display: flex;
   }
-  .footer-wrapper ul li a {
+  nav .side-item a {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .footer-wrapper ul li a svg {
+  nav .side-item a svg {
     width: 50%;
     height: 50%;
   }

@@ -83,13 +83,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    # @property
-    # def username(self):
-    #     """username属性のゲッター
-
-    #     他アプリケーションが、username属性にアクセスした場合に備えて定義
-    #     メールアドレスを返す
-    #     """
-    #     # return self.email
-    #     return self.username
