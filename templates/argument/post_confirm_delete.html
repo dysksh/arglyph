@@ -1,8 +1,9 @@
 {% extends 'account/base.html' %}
 {% load crispy_forms_tags %}
 
+
 {% block body %}
-    <div class="item">
+    <div class="post-item">
         <div>本当に「{{ object.title }}」を削除しますか？</div>
         <form method='POST' role="form" action="">
             {% csrf_token %}

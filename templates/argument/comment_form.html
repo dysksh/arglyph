@@ -3,14 +3,10 @@
 
 
 {% block body %}
-    <div class="item">
+    <div class="post-item">
         <h1>{{ post.title}}</h1>
         <p>投稿者: <span>{{ post.advocate }}</span> {{ post.date_posted|date:'Y-m-d P' }}</p>
-
-        <ul>
-            <li>{{ post.content }}</li>
-        </ul>
-        
+        <div class="post-content">{{ post.content }}</div>
         {% if comment %}
             <div class="comment-box-outer" id="{{ comment.parent.id }}">
                 <div class="comment-box">
@@ -20,8 +16,8 @@
             </div>
         {% endif %}
     </div>
-    <section class="section">
-        <div class="form">
+    <section>
+        <div class="post-form">
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
