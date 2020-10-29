@@ -1,12 +1,13 @@
 from django.shortcuts import redirect, resolve_url
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
+from django.core.mail import send_mail
 from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.views import generic
@@ -25,11 +26,24 @@ class CustomUserCreationForm(UserCreationForm):
         User.objects.filter(email=email, is_active=False).delete()
         return email
 
+class EmailChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('email',)
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        User.objects.filter(email=email, is_active=False).delete()
+        return email
+
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username',)
 
+
+"""ユーザー登録"""
 class Signup(generic.CreateView):
     """ユーザー仮登録"""
     template_name = 'account/signup.html'
@@ -62,11 +76,9 @@ class Signup(generic.CreateView):
             user.email_user(subject, message, from_email)
             return redirect('account:signup-done')
 
-
 class SignupDone(generic.TemplateView):
     """仮登録"""
     template_name = 'account/signup_done.html'
-
 
 class SignupComplete(generic.TemplateView):
     """メール内URLアクセス後のユーザー本登録"""
@@ -103,25 +115,86 @@ class SignupComplete(generic.TemplateView):
 
         return HttpResponseBadRequest()
 
+"""設定周り"""
+class Setting(generic.TemplateView):
+    model = User
+    template_name = 'account/setting.html'
+
+# メールアドレス変更
+class EmailChange(LoginRequiredMixin, generic.FormView):
+    template_name = 'account/email_change.html'
+    form_class = EmailChangeForm
+
+    def form_valid(self, form):
+        user = self.request.user
+        new_email = form.cleaned_data['email']
+
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
+        context = {
+            'protocol': self.request.scheme,
+            'domain': domain,
+            'token': dumps(new_email),
+            'user': user,
+        }
+        subject = render_to_string('mail_templates/email_change/subject.txt', context)
+        message = render_to_string('mail_templates/email_change/message.txt', context)
+        send_mail(subject, message, None, [new_email])
+
+        return redirect('account:email-change-done')
+
+class EmailChangeDone(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'account/email_change_done.html'
+
+class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'account/email_change_complete.html'
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+
+    def get(self, request, **kwargs):
+        token = kwargs.get('token')
+        try:
+            new_email = loads(token, max_age=self.timeout_seconds)
+
+        # 期限切れ
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題なし
+        else:
+            User.objects.filter(email=new_email, is_active=False).delete()
+            request.user.email = new_email
+            request.user.save()
+            return super().get(request, **kwargs)
+
+# パスワード変更
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy('argument-home')
+    template_name = 'account/password_change.html'
+
+
+"""パスワードリセット"""
 class PasswordReset(PasswordResetView):
     subject_template_name = 'mail_templates/password_reset/subject.txt'
     email_template_name = 'mail_templates/password_reset/message.txt'
     template_name = 'account/password_reset_form.html'
     success_url = reverse_lazy('account:password-reset-done')
 
-
 class PasswordResetDone(PasswordResetDoneView):
     template_name = 'account/password_reset_done.html'
-
 
 class PasswordResetConfirm(PasswordResetConfirmView):
     success_url = reverse_lazy('account:password-reset-complete')
     template_name = 'account/password_reset_confirm.html'
 
-
 class PasswordResetComplete(PasswordResetCompleteView):
     template_name = 'account/password_reset_complete.html'
 
+
+"""ユーザー詳細"""
 class OnlyCurrentUserMixin(UserPassesTestMixin):
     raise_exception = False
 
