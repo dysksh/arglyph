@@ -338,6 +338,34 @@ input:-webkit-autofill {
 .user-detail a:hover  {
   background-color: #999;
 }
+/* setting */
+.setting {
+  margin: 15px;
+}
+.setting h1 {
+  padding-left: 10px;
+  border-bottom: 2px solid rgba(0,0,0,.1);
+  font-size: 32px;
+}
+.setting-item {
+  text-align: left;
+  font-size: 20px;
+}
+.setting-item-box {
+  height: 76px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.setting-item-box-left {
+  width: 90%;
+}
+.setting-email {
+  font-size: 12px;
+  width: 100%;
+}
 /* argument周り */
 .post-item {
   font-size: 15px;
