@@ -9,7 +9,7 @@
             <h3>{{ post.title}}</h3>
             <div class="post-content">{{ post.content }}</div>
         </a>
-        <p>投稿者: <a href="#">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
+        <p>投稿者: <a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
         <hr>
     </div>
     {% endfor %}

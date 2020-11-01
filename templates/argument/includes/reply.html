@@ -12,7 +12,7 @@
             <a href="#{{ reply.parent.id }}"><div class="comment">{{ reply.parent.content }}</div></a>
         </div>
         <div class="content">{{ reply.content }}</div>
-        <p>{{ reply.author }}</p>
+        <p><a href="{% url 'account:user-detail' reply.author.pk %}">{{ reply.author }}</a></p>
         <div class="form-btn">
             <form action="{% url 'reply-create' reply.pk %}">
                 <button type="submit">返信</button>
