@@ -4,28 +4,28 @@
 {% block body %}
     <div class="post-item">
         <h1>{{ object.title}}</h1>
-        <p>投稿者: <span>{{ object.advocate }}</span> {{ object.date_posted|date:'Y-m-d P' }}</p>
+        <p>投稿者: <span><a href="{% url 'account:user-detail' post.advocate.pk %}">{{ object.advocate }}</a></span> {{ object.date_posted|date:'Y-m-d P' }}</p>
         <div class="post-content">{{ object.content }}</div>
-        {% if request.user == post.advocate %}
-            <div class="form-btn">
+        <div class="form-btn">
                 <form action="{% url 'comment-create' post.pk %}">
                     <button type="submit">コメント</button>
                 </form>
+            {% if request.user == post.advocate %}
                 <form action="{% url 'post-update' post.id %}">
                     <button type="submit">更新</button>
                 </form>
                 <form action="{% url 'post-delete' post.id %}">
                     <button type="submit">削除</button>
                 </form>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
         
         <h2 class="comment-list">コメントリスト</h2>
         {% for comment in comment_list %}
             <div class="comment-box-outer" id="{{ comment.id }}">
                 <div class="comment-box">
                     <div class="content">{{ comment.content }}</div>
-                    <p>{{ comment.author }}</p>
+                    <p><a href="{% url 'account:user-detail' comment.author.pk %}">{{ comment.author }}</p>
                     <div class="form-btn">
                         <form action="{% url 'reply-create' comment.pk %}">
                             <button type="submit">返信</button>
