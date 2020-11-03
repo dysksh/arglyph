@@ -319,9 +319,19 @@ input:-webkit-autofill {
 }
 .user-detail .user-name {
   font-size: 22px;
-  margin-bottom: .5rem;
+  margin: 20px auto;
   width: 100%;
   text-align: center;
+}
+.user-detail .user-image img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.user-detail .user-profile {
+  width: 100%;
+  height: auto;
 }
 .user-detail a {
   width: 70px;
