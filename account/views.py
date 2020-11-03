@@ -13,6 +13,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.views import generic
 from django import forms
+import boto3
 
 User = get_user_model()
 
@@ -213,5 +214,13 @@ class UserUpdate(OnlyCurrentUserMixin, generic.UpdateView):
     template_name = 'account/user_update.html'
 
     def get_success_url(self):
-        os.remove('./' + str(self.request.user.image))
+        # 更新するときにもとの画像ファイルを削除（容量を食ってしまうため）
+        if self.request.user.image:
+            if settings.DEBUG:
+                os.remove('./' + str(self.request.user.image))
+            else:
+                s3_client = boto3.client('s3')
+                s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(self.request.user.image))
+        else:
+            pass
         return resolve_url('account:user-detail', pk=self.kwargs['pk'])
