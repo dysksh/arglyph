@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import redirect, resolve_url
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -12,6 +13,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.views import generic
 from django import forms
+import boto3
 
 User = get_user_model()
 
@@ -40,7 +42,7 @@ class EmailChangeForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'image', 'profile')
 
 
 """ユーザー登録"""
@@ -212,4 +214,13 @@ class UserUpdate(OnlyCurrentUserMixin, generic.UpdateView):
     template_name = 'account/user_update.html'
 
     def get_success_url(self):
+        # 更新するときにもとの画像ファイルを削除（容量を食ってしまうため）
+        if self.request.user.image:
+            if settings.DEBUG:
+                os.remove('./' + str(self.request.user.image))
+            else:
+                s3_client = boto3.client('s3')
+                s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(self.request.user.image))
+        else:
+            pass
         return resolve_url('account:user-detail', pk=self.kwargs['pk'])
