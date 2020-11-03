@@ -153,6 +153,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+IMAGE_ROOT = os.path.join(BASE_DIR, 'assets/img')
+IMAGE_URL = '/assets/img/'
 
 try:
     from .local_settings import *

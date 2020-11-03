@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import redirect, resolve_url
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -40,7 +41,7 @@ class EmailChangeForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'image', 'profile')
 
 
 """ユーザー登録"""
@@ -212,4 +213,5 @@ class UserUpdate(OnlyCurrentUserMixin, generic.UpdateView):
     template_name = 'account/user_update.html'
 
     def get_success_url(self):
+        os.remove('./' + str(self.request.user.image))
         return resolve_url('account:user-detail', pk=self.kwargs['pk'])

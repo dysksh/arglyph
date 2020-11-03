@@ -43,6 +43,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, verbose_name="メールアドレス")
     first_name = models.CharField(max_length=30, blank=True, verbose_name="姓")
     last_name = models.CharField(max_length=150, blank=True, verbose_name="名")
+    image = models.ImageField(upload_to='assets/img', blank=True, null=True, verbose_name="アイコン画像")
+    profile = models.CharField(max_length=150, blank=True, verbose_name="自己紹介")
 
     is_staff = models.BooleanField(
         _('staff status'),

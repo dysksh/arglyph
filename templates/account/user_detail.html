@@ -3,7 +3,13 @@
 
 {% block body %}
     <div class="user-detail">
+        {% if user.image %}
+            <div class="user-image"><img src="{{ user.image.url }}"></div>
+        {% else %}
+            <div class="user-image"><img src="/assets/img/noImage.jpg"></div>
+        {% endif %}
         <div class="user-name">{{ user.username }}</div>
+        <div class="user-profile">{{ user.profile }}</div>
         {% if user.pk == request.user.pk %}
             <a href="{% url 'account:user-update' user.pk %}">変更</a>
         {% endif %}
