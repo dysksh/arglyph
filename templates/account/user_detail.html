@@ -3,11 +3,13 @@
 
 {% block body %}
     <div class="user-detail">
-        {% if user.image %}
-            <div class="user-image"><img src="{{ user.image.url }}"></div>
-        {% else %}
-            <div class="user-image"><img src="{{ DEFAULT_IMAGE }}"></div>
-        {% endif %}
+        <div class="user-image">
+            {% if user.image %}
+                <img src="{{ user.image.url }}">
+            {% else %}
+                No Image
+            {% endif %}
+        </div>
         <div class="user-name">{{ user.username }}</div>
         <div class="user-profile">{{ user.profile }}</div>
         {% if user.pk == request.user.pk %}

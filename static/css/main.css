@@ -323,6 +323,17 @@ input:-webkit-autofill {
   width: 100%;
   text-align: center;
 }
+.user-detail .user-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  color: #4a4a4a;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .user-detail .user-image img {
   width: 150px;
   height: 150px;
