@@ -1,4 +1,9 @@
 from django.conf import settings
 
-def image_url(request):
-    return {'IMAGE_URL': settings.IMAGE_URL}
+def default_image(request):
+    if settings.DEBUG:
+        image_url = str(settings.IMAGE_URL) + 'noImage.jpg'
+    else:
+        image_url = str(settings.IMAGE_URL) + 'assets/img/noImage.jpg'
+
+    return {'DEFAULT_IMAGE': image_url}

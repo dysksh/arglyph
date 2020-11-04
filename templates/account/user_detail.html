@@ -6,7 +6,7 @@
         {% if user.image %}
             <div class="user-image"><img src="{{ user.image.url }}"></div>
         {% else %}
-            <div class="user-image"><img src="{{ IMAGE_URL }}noImage.jpg"></div>
+            <div class="user-image"><img src="{{ DEFAULT_IMAGE }}"></div>
         {% endif %}
         <div class="user-name">{{ user.username }}</div>
         <div class="user-profile">{{ user.profile }}</div>
