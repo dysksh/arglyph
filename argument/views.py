@@ -23,6 +23,10 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
     def get_context_data(self, **kwargs):
+        # detailページを訪れたタイミングで閲覧数をカウント
+        self.object.views += 1
+        self.object.save()
+        
         context = super().get_context_data(**kwargs)
         # どのコメントにも紐つかないコメント(記事へのコメント)を取得
         context["comment_list"] = self.object.comment_set.filter(parent__isnull=True) 
