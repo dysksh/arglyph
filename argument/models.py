@@ -9,6 +9,7 @@ class Post(models.Model):
     content = models.TextField(verbose_name="内容")
     advocate = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name = "advocate", verbose_name="投稿者")
     date_posted = models.DateTimeField(default=timezone.now, verbose_name="投稿日時")
+    views = models.PositiveIntegerField(default=0)
     author = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         through="Comment",
