@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/<int:pk>/delete', views.PostDeleteView.as_view(), name='post-delete'),
     path('comment/<int:post_pk>/', views.comment_create, name='comment-create'),
     path('reply/<int:comment_pk>/', views.reply_create, name='reply-create'),
+    path('post/ranking/', views.PostRankingView.as_view(), name='post-ranking'),
 ]
