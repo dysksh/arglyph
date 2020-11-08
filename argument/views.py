@@ -66,6 +66,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+class PostRankingView(ListView):
+    model = Post
+    template_name = 'argument/ranking.html'
+    context_object_name = 'posts'
+    ordering = ['-views']
+
 # コメントフォーム
 CommentForm = forms.modelform_factory(Comment, fields=('content', ))
 
