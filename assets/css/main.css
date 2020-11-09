@@ -402,6 +402,8 @@ input:-webkit-autofill {
 }
 .post-item .post-content {
   margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .form-btn {
   text-align: right;
