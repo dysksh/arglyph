@@ -16,4 +16,21 @@
             <a href="{% url 'account:user-update' user.pk %}">変更</a>
         {% endif %}
     </div>
+    <div class="user-post">
+        <div class="user-post-tabs">
+            <a href="{% url 'account:user-detail' user.pk %}" class="selected">投稿</a>
+            <a href="#">返信</a>
+        </div>
+        {% for post in posts %}
+        <div class="post-item">
+            <a href="{% url 'post-detail' post.id %}">
+                <h3>{{ post.title}}</h3>
+                <div class="post-content">{{ post.content }}</div>
+            </a>
+            <p>投稿者: <a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
+            <p>（閲覧数 {{ post.views }})</p>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
