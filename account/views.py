@@ -13,6 +13,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.views import generic
 from django import forms
+from argument.models import Post
 import boto3
 
 User = get_user_model()
@@ -207,6 +208,13 @@ class OnlyCurrentUserMixin(UserPassesTestMixin):
 class UserDetail(generic.DetailView):
     model = User
     template_name = 'account/user_detail.html'
+    def get_context_data(self, **kwargs):
+        user_pk = self.kwargs.get('pk')
+        user = User.objects.get(pk=user_pk)
+        
+        context = super().get_context_data(**kwargs)
+        context["posts"] = Post.objects.filter(advocate=user)
+        return context
 
 class UserUpdate(OnlyCurrentUserMixin, generic.UpdateView):
     model = User

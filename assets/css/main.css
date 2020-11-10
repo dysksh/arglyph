@@ -359,6 +359,28 @@ input:-webkit-autofill {
 .user-detail a:hover  {
   background-color: #999;
 }
+.user-post {
+  width: 90%;
+  margin: 0 auto;
+}
+.user-post-tabs {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+}
+.user-post-tabs a {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+.user-post-tabs a:hover {
+  background-color: #ddd;
+}
+.user-post-tabs a.selected {
+  border-bottom: 2px solid rgba(0,0,0,.1);
+}
 /* setting */
 .setting {
   margin: 15px;
@@ -579,6 +601,9 @@ input:-webkit-autofill {
   nav .side-item a svg {
     width: 50%;
     height: 50%;
+  }
+  .user-post {
+    width: 100%;
   }
 }
 @media screen and (min-width: 560px) {
