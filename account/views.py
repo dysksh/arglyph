@@ -13,7 +13,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.views import generic
 from django import forms
-from argument.models import Post
+from argument.models import Post, Comment
 import boto3
 
 User = get_user_model()
@@ -232,3 +232,14 @@ class UserUpdate(OnlyCurrentUserMixin, generic.UpdateView):
         else:
             pass
         return resolve_url('account:user-detail', pk=self.kwargs['pk'])
+
+class UserDetailComment(generic.DetailView):
+    model = User
+    template_name = 'account/user_comment.html'
+    def get_context_data(self, **kwargs):
+        user_pk = self.kwargs.get('pk')
+        user = User.objects.get(pk=user_pk)
+        
+        context = super().get_context_data(**kwargs)
+        context["comments"] = Comment.objects.filter(author=user)
+        return context

@@ -21,5 +21,6 @@ urlpatterns = [
     path('password_reset/complete/', views.PasswordResetComplete.as_view(), name='password-reset-complete'),
     path('user_detail/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user-update'),
+    path('user_detail/<int:pk>/comment', views.UserDetailComment.as_view(), name='user-comment'),
 ]
 
