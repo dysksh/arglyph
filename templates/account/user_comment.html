@@ -18,17 +18,16 @@
     </div>
     <div class="user-post">
         <div class="user-post-tabs">
-            <a href="{% url 'account:user-detail' user.pk %}" class="selected">投稿</a>
-            <a href="{% url 'account:user-comment' user.pk %}">コメント</a>
+            <a href="{% url 'account:user-detail' user.pk %}">投稿</a>
+            <a href="{% url 'account:user-comment' user.pk %}" class="selected">コメント</a>
         </div>
-        {% for post in posts %}
+        {% for comment in comments %}
         <div class="post-item">
-            <a href="{% url 'post-detail' post.id %}">
-                <h3>{{ post.title}}</h3>
-                <div class="post-content">{{ post.content }}</div>
+            <a href="{% url 'post-detail' comment.post.id %}#{{ comment.id }}">
+                <div class="post-title">「{{ comment.post.title }}」でのコメント</div>
+                <div class="post-content">{{ comment.content}}</div>
             </a>
-            <p>投稿者: <a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
-            <p>（閲覧数 {{ post.views }})</p>
+            <p>投稿者: <a href="{% url 'account:user-detail' comment.author.pk %}">{{ comment.author }}</a> <span class="pc-only">{{ comment.date_posted|date:'Y-m-d P' }}</span></p>
             <hr>
         </div>
         {% endfor %}
