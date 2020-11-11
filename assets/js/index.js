@@ -29,3 +29,84 @@ $(function(){
     return false;
   });
 });
+
+// #レスポンシブ対応
+$(document).ready(function(){
+if (window.matchMedia( '(min-width: 320px) and (max-width: 639px)' ).matches) {
+  viewportWidth = 270
+  viewportHeight = 170
+  boundaryWidth = 290
+  boundaryHeight = 180
+} else if (window.matchMedia( '(min-width: 640px) and (max-width: 1023px)' ).matches) {
+  viewportWidth = 460
+  viewportHeight = 290
+  boundaryWidth = 480
+  boundaryHeight = 290
+} else {
+  viewportWidth = 650
+  viewportHeight = 400
+  boundaryWidth = 700
+  boundaryHeight = 400
+}
+
+// #croppieの初期設定
+$image_crop = $('#image_demo').croppie({
+ enableExif: true,
+  viewport: {
+   width: viewportWidth,
+   height:viewportHeight,
+   type:'square' //circle
+  },
+  boundary: {
+   width: boundaryWidth,
+   height: boundaryHeight
+  }
+});
+
+$('#upload_image').on('change', function(){
+  var reader = new FileReader();
+  reader.onload = function (event) {
+    $image_crop.croppie('bind', {
+    url: event.target.result
+   }).then(function(){
+     console.log('jQuery bind complete');
+   });
+ }
+ reader.readAsDataURL(this.files[0]);
+  $('#uploadimageModal').addClass('show');
+  $('#uploadimageModal').css('display','block');
+});
+
+// #ボタンをクリックしたら
+$('.crop_image').click(function(event){
+ $image_crop.croppie('result', {
+   type: 'canvas',
+   size: 'viewport'
+ }).then(function(response){
+  //  console.log(response)
+   $.ajax({
+     url:"/image",
+     type: "POST",
+     data:{"image": response},
+     success:function(data) {  
+      $('#uploadimageModal').removeClass('show');
+      $('#uploadimageModal').css('display','none');
+      $('input[type=file]').val('');　//inputファイルを空にする。
+      $('#ajax_account_image').attr('src',data.image);
+      setTimeout(function(){
+        $("#overlay").fadeOut(300);
+      },500);
+     }
+   });
+  })
+ });
+
+// #モーダル を閉じる
+$(document).ready(function(){
+  $('#croppie_close').click(function() {
+    $('#uploadimageModal').removeClass('show');
+    $('#uploadimageModal').css('display','none');
+    $('input[type=file]').val('');
+  });
+});
+  });

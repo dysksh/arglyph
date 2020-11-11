@@ -14,4 +14,33 @@
             </form>
         </div>
     </section>
+
+
+    <div class="panel panel-default">
+        <div class="panel-body" align="left">
+        <h5><i class="far fa-images"></i>サークル画像アップロード</h5>
+        <div class="custom-file">
+            <input type="file" name="upload_image" id="upload_image" class="custom-file-input" accept="image/*" />
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        </div>
+    </div>
+    <div style="z-index: 3;" class="modal fade" id="uploadimageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">メディアを編集</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="image_demo" style="width:350px; margin-top:10px"></div>
+                    <div class="col-md-4" style="padding-top:10px;">
+                        <button class="btn btn-outline-success crop_image">画像をトリミング&アップロード</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" id="croppie_close" data-dismiss="modal">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}
