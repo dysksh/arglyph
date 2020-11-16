@@ -63,6 +63,35 @@ $image_crop = $('#image_demo').croppie({
   }
 });
 
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+  // these HTTP methods do not require CSRF protection
+  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+  beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+  }
+});
+
 $('#upload_image').on('change', function(){
   var reader = new FileReader();
   reader.onload = function (event) {
@@ -85,7 +114,7 @@ $('.crop_image').click(function(event){
  }).then(function(response){
   //  console.log(response)
    $.ajax({
-     url:"/image",
+     url: '',
      type: "POST",
      data:{"image": response},
      success:function(data) {  

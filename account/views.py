@@ -274,7 +274,7 @@ def image():
         my_bucket.Object(image).put(Body=BytesIO(dec_data))
         image_url = 'https://'+str(app.config['AWS_BUCKET'])+'.s3-ap-northeast-1.amazonaws.com/{}'
         image_url = image_url.format(image)
-        current_user.profile_image = image_url
+        current_user.image = image_url
         db.session.commit()
         return jsonify({'image': image_url})
 
