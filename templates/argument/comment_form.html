@@ -5,13 +5,40 @@
 {% block body %}
     <div class="post-item">
         <h1>{{ post.title}}</h1>
-        <p>投稿者: <span><a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a></span> {{ post.date_posted|date:'Y-m-d P' }}</p>
+        <div class="author">
+            <span>
+                <a href="{% url 'account:user-detail' post.advocate.pk %}">
+                    <div class="user-image">
+                    {% if post.advocate.image %}
+                        <img src="{{ post.advocate.image.url }}">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                    </div>
+                    {{ post.advocate }}
+                </a>  
+            </span>
+            {{ post.date_posted|date:'Y-m-d P' }}
+        </div>
         <div class="post-content">{{ post.content }}</div>
         {% if comment %}
             <div class="comment-box-outer" id="{{ comment.parent.id }}">
                 <div class="comment-box">
                     <div class="content">{{ comment.content }}</div>
-                    <p><a href="{% url 'account:user-detail' comment.author.pk %}">{{ comment.author }}</a></p>
+                    <div class="author">
+                        <span>
+                            <a href="{% url 'account:user-detail' comment.author.pk %}">
+                                <div class="user-image">
+                                {% if comment.author.image %}
+                                    <img src="{{ comment.author.image.url }}">
+                                {% else %}
+                                    No Image
+                                {% endif %}
+                                </div>
+                                {{ comment.author }}
+                            </a>  
+                        </span>
+                    </div>
                 </div>
             </div>
         {% endif %}

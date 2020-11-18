@@ -10,7 +10,6 @@
             <div class="post-content">{{ post.content }}</div>
         </a>
         <div class="author">
-            投稿者: 
             <a href="{% url 'account:user-detail' post.advocate.pk %}">
                 <div class="user-image">
                 {% if post.advocate.image %}
