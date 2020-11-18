@@ -421,9 +421,32 @@ input:-webkit-autofill {
 .post-item h1 {
   font-size: 22px;
 }
-.post-item p {
-  text-align: right;
-  font-size: 12px;
+.post-item .author {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.post-item .author a {
+  display: flex;
+  align-items: center;
+}
+.post-item .author .user-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  color: #4a4a4a;
+  font-size: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.post-item .author .user-image img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .post-item .post-content {
   margin-bottom: 1rem;

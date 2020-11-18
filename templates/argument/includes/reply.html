@@ -12,7 +12,20 @@
             <a href="#{{ reply.parent.id }}"><div class="comment">{{ reply.parent.content }}</div></a>
         </div>
         <div class="content">{{ reply.content }}</div>
-        <p><a href="{% url 'account:user-detail' reply.author.pk %}">{{ reply.author }}</a></p>
+        <div class="author">
+            <span>
+                <a href="{% url 'account:user-detail' reply.author.pk %}">
+                    <div class="user-image">
+                    {% if reply.author.image %}
+                        <img src="{{ reply.author.image.url }}">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                    </div>
+                    {{ reply.author }}
+                </a>  
+            </span>
+        </div>
         <div class="form-btn">
             <form action="{% url 'reply-create' reply.pk %}">
                 <button type="submit">返信</button>
