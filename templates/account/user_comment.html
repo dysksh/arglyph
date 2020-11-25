@@ -25,9 +25,23 @@
         <div class="post-item">
             <a href="{% url 'post-detail' comment.post.id %}#{{ comment.id }}">
                 <div class="post-title">「{{ comment.post.title }}」でのコメント</div>
-                <div class="post-content">{{ comment.content}}</div>
+                <div class="comment-content">{{ comment.content}}</div>
             </a>
-            <p>投稿者: <a href="{% url 'account:user-detail' comment.author.pk %}">{{ comment.author }}</a> <span class="pc-only">{{ comment.date_posted|date:'Y-m-d P' }}</span></p>
+            <div class="author">
+                <a href="{% url 'account:user-detail' comment.author.pk %}">
+                    <div class="user-image">
+                    {% if comment.author.image %}
+                        <img src="{{ comment.author.image.url }}">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                    </div>
+                    {{ comment.author }}
+                </a> 
+                <span class="pc-only">
+                    {{ comment.date_posted|date:'Y-m-d P' }}
+                </span>
+            </div>
             <hr>
         </div>
         {% endfor %}
