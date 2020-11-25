@@ -384,6 +384,9 @@ input:-webkit-autofill {
 .post-title {
   font-size: 12px;
 }
+.post-item .comment-content {
+  font-size: 20px;
+}
 /* setting */
 .setting {
   margin: 15px;

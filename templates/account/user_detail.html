@@ -27,7 +27,21 @@
                 <h3>{{ post.title}}</h3>
                 <div class="post-content">{{ post.content }}</div>
             </a>
-            <p>投稿者: <a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
+            <div class="author">
+                <a href="{% url 'account:user-detail' post.advocate.pk %}">
+                    <div class="user-image">
+                    {% if post.advocate.image %}
+                        <img src="{{ post.advocate.image.url }}">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                    </div>
+                    {{ post.advocate }}
+                </a> 
+                <span class="pc-only">
+                    {{ post.date_posted|date:'Y-m-d P' }}
+                </span>
+            </div>
             <p>（閲覧数 {{ post.views }})</p>
             <hr>
         </div>
