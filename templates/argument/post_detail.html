@@ -19,7 +19,7 @@
             </span>
             {{ object.date_posted|date:'Y-m-d P' }}
         </div>
-        <div class="post-content">{{ object.content }}</div>
+        <div class="post-content">{{ object.content | linebreaks }}</div>
         <div class="form-btn">
                 <form action="{% url 'comment-create' post.pk %}">
                     <button type="submit">コメント</button>

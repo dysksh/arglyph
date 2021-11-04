@@ -8,7 +8,7 @@
     <div class="post-item">
         <a href="{% url 'post-detail' post.id %}">
             <h3>{{ post.title}}</h3>
-            <div class="post-content">{{ post.content }}</div>
+            <div class="post-content">{{ post.content | linebreaks }}</div>
         </a>
         <p>投稿者: <a href="{% url 'account:user-detail' post.advocate.pk %}">{{ post.advocate }}</a> <span class="pc-only">{{ post.date_posted|date:'Y-m-d P' }}</span></p>
         <p>（閲覧数 {{ post.views }})</p>
