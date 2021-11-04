@@ -20,7 +20,7 @@
             </span>
             {{ post.date_posted|date:'Y-m-d P' }}
         </div>
-        <div class="post-content">{{ post.content }}</div>
+        <div class="post-content">{{ post.content | linebreaks }}</div>
         {% if comment %}
             <div class="comment-box-outer" id="{{ comment.parent.id }}">
                 <div class="comment-box">
